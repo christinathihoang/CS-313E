@@ -11,46 +11,53 @@
 # create weapon class
 class Weapon():
 
-	def __init__(self, type):
-		self.type = type
+	def __init__(self, weaponType):
+		self.weapon = weaponType
+		self.damage = 0
 
 	# string method
 	def __str__(self):
-		return (str(self.type))
+		return (str(self.weapon))
 
 	# damage points method
-	def damage(self):
+	def getDamage(self):
 		if self.weapon == "dagger":
-			return(4)
+			self.damage = 4
 		elif self.weapon == "axe":
-			return(6)
+			self.damage = 6
 		elif self.weapon == "staff":
-			return (6)
+			self.damage = 6
 		elif self.weapon == "sword":
-			return(10)
-		elif self.weapon == "none":
-			return(1)
+			self.damage = 10
+		elif self.weapon == None:
+			self.damage = 1
+
+		return (self.damage)
 
 # create armor class
 class Armor():
 
-	def __init__(self, type):
-		self.type = type
+	def __init__(self, armorType):
+		self.armor = armorType
+		self.protection = 0
+
 
 	# string method
 	def __str__(self):
-		return (str(self.type))
+		return (str(self.armor))
 
 	# armor class method
-	def protection(self):
+	def getProtection(self):
 		if self.armor == "plate":
-			return(2)
+			self.protection = 2
 		elif self.armor == "chain":
-			return(5)
+			self.protection = 5
 		elif self.armor == "leather":
-			return(8)
-		elif self.armor == "none":
-			return(10)
+			self.protection = 8
+		elif self.armor == None:
+			self.protection = 10
+
+		return(self.protection)
 
 # create character class
 class RPGCharacter():
@@ -61,42 +68,42 @@ class RPGCharacter():
 
 	def __init__(self, name):
 		self.name = name
-		self.armor = "none"
-		self.weapon = "none"
+		self.armor = Armor(None)
+		self.weapon = Weapon(None)
 
 	# put on armor method
-	def putOnArmor(self, armor):
-		self.armor = str(armor)
+	def putOnArmor(self, armorType):
+		self.armor = Armor(armorType)
 		if self == Wizard:
 			print("Armor not allowed for this character class.")
 		else:
-			print(self.name," is now wearing a(n) ",self.armor)
+			print(self.name,"is now wearing a(n)",self.armor)
 	
 	# take off armor method
-	def takeOffArmor(self, armor):
-		self.armor = "none"
-		print(self.name," is no longer wearing anything.")
+	def takeOffArmor(self, armorType):
+		self.armor = Armor(None)
+		print(self.name,"is no longer wearing anything.")
 	
 	# wield weapon method
-	def wield(self, weapon):
+	def wield(self, weaponType):
 		# wizards cannot wield weapons
-		self.weapon = str(weapon)
+		self.weapon = Weapon(weaponType)
 		if self == Wizard:
 			print("Weapon not allowed for this character class")
 		else:
-			print(self.name," is now wielding a(n) ",self.weapon)
+			print(self.name,"is now wielding a(n)",self.weapon)
 
 	# unwield weapon method
-	def unwield(self, armor):
-		self.weapon = "none"
-		print(self.name," is no longer wielding anything.")
+	def unwield(self, weaponType):
+		self.weapon = Weapon(None)
+		print(self.name,"is no longer wielding anything.")
 
 	# fight method
 	def fight(self, opponent):
-		print(self.name," attacks ",opponent.name," with a(n) ",self.weapon)
-		opponent.health -= Weapon.damage(self)
-		print(self.name," does ",Weapon.damage(self)," damage to ",opponent.name)
-		print(opponent.name," is now down to ",str(opponent.health)," health")
+		print(self.name,"attacks",opponent.name,"with a(n)",self.weapon)
+		opponent.health -= self.weapon.getDamage()
+		print(self.name," does ",str(self.weapon.getDamage())," damage to ",opponent.name)
+		print(opponent.name,"is now down to ",str(opponent.health),"health")
 
 		RPGCharacter.checkForDefeat(opponent)
 
@@ -113,7 +120,7 @@ class RPGCharacter():
 		print("  Current Spell Points: ",self.spellPoints)
 		print("  Wielding: ",self.weapon)
 		print("  Wearing: ",self.armor)
-		print("  Armor Class: ",str(Armor.protection(self)))
+		print("  Armor Class: ",str(self.armor.getProtection()))
 		print("\n")
 
 # create fighter subclass
@@ -138,8 +145,8 @@ class Wizard(RPGCharacter):
 
 	def __init__(self, name):
 		self.name = name
-		self.spell = "none"
-		self.armor = "none"
+		self.spell = None
+		self.armor = Armor(None)
 		self.spellCost = 0
 		self.spellEffect = 0
 		
