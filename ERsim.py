@@ -1,3 +1,13 @@
+#   File: ERsim.py
+#   Description: This program simulates the environment of a busy ER room using queues.
+#   Student's Name: Christina Hoang
+#   Student's UT EID: ch42297
+#   Course Name: CS 313E
+#   Unique Number: 86940
+#
+#   Date Created: 7/3/2017
+#   Date Last Modified: 7/5/2017
+
 import sys
 
 # create queue
