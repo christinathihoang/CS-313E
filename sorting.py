@@ -344,10 +344,9 @@ def main():
 
             # randomly pops and inserts a number to create an almost sorted list
             for k in range(x):
-               randomIndex1 = random.randint(0,len(numList)-1)
-               randomNum = numList.pop(randomIndex1) 
-               randomIndex2 = random.randint(0,len(numList)-1)
-               numList.insert(randomIndex2,randomNum)   
+                idx1, idx2 = random.sample(range(len(numList)),2)
+                randomNum = numList.pop(idx1)
+                numList.insert(idx2,randomNum)   
 
             # calculates time for bubble sort
             startTime = time.perf_counter()
